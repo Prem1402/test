@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Q2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script type="text/javascript">
+      function ValidatePassword() {
+        var res = 0
+        var invalid = []
+        var password = document.getElementById("password").value
+
+        if (
+          password.match(/[a-z]/g) &&
+          password.match(/[A-Z]/g) &&
+          password.match(/[0-9]/g) &&
+          password.match(/[^a-zA-Z\d]/g) &&
+          password.length >= 6
+        ) {
+          res = "True"
+        } else {
+          if (password.length < 6) {
+            res++
+            invalid.push("*Length must be 6 characters")
+          }
+          if (!password.match(/[0-9]/g)) {
+            res++
+            invalid.push("*Number Required")
+          }
+          if (!password.match(/[A-Z]/g)) {
+            console.log("capital")
+            res++
+            invalid.push("*Capital Required")
+          }
+          if (!password.match(/[a-z]/g)) {
+            res++
+            invalid.push("*Letter Required")
+          }
+          if (!password.match(/[^a-zA-Z\d]/g)) {
+            res++
+            invalid.push("*Special character required")
+          }
+        }
+
+        document.getElementById("output").value = res
+        document.getElementById("required").value = invalid.join("\n")
+      }
+    </script>
+  </head>
+  <body>
+    <p>
+      Input Password:
+      <input type="text" placeholder="abc" id="password" />
+
+      <input type="button" value="Check" onclick="ValidatePassword()" />
+      <br />
+      <br />
+      Output:
+      <input type="text" id="output" readonly />
+      <br />
+      Required:
+      <textarea id="required" rows="6" cols="30"></textarea>
+    </p>
+  </body>
+</html>
